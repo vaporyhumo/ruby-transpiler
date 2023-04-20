@@ -1,7 +1,8 @@
-use {false_::False, nil::Nil, true_::True};
+use {false_::False, nil::Nil, self_::Self_, true_::True};
 
 mod false_;
 mod nil;
+mod self_;
 mod split;
 mod true_;
 
@@ -9,12 +10,16 @@ mod true_;
 pub enum Token {
   False,
   Nil,
+  Self_,
   True,
 }
 
 impl Token {
   fn lex_token(string: &str) -> Option<(Token, String)> {
-    False::lex(string).or(True::lex(string)).or(Nil::lex(string))
+    False::lex(string)
+      .or(True::lex(string))
+      .or(Nil::lex(string))
+      .or(Self_::lex(string))
   }
 
   pub fn lex(string: &str) -> Vec<Token> {

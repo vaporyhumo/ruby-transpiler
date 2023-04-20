@@ -1,19 +1,19 @@
 use crate::{split, Token};
 
 #[derive(Debug, PartialEq)]
-pub struct Nil {}
+pub struct Self_ {}
 
-impl Nil {
-  fn new() -> Nil {
-    Nil {}
+impl Self_ {
+  fn new() -> Self_ {
+    Self_ {}
   }
 
   fn token() -> Token {
-    Token::Nil
+    Token::Self_
   }
 
   fn split(string: &str) -> Option<(String, String)> {
-    split::split(string, "^nil")
+    split::split(string, "^self")
   }
 
   pub fn lex(string: &str) -> Option<(Token, String)> {
@@ -21,15 +21,15 @@ impl Nil {
   }
 }
 
-impl Default for Nil {
+impl Default for Self_ {
   fn default() -> Self {
     Self::new()
   }
 }
 
-impl From<Nil> for Token {
-  fn from(_: Nil) -> Self {
-    Nil::token()
+impl From<Self_> for Token {
+  fn from(_: Self_) -> Self {
+    Self_::token()
   }
 }
 
@@ -39,31 +39,34 @@ mod tests {
 
   #[test]
   fn test_new() {
-    assert_eq!(Nil::new(), Nil {});
+    assert_eq!(Self_::new(), Self_ {});
   }
 
   #[test]
   fn test_token() {
-    assert_eq!(Nil::token(), Token::Nil);
+    assert_eq!(Self_::token(), Token::Self_);
   }
 
   #[test]
   fn test_split() {
-    assert_eq!(Nil::split("nil"), Some(("nil".to_string(), "".to_string())));
+    assert_eq!(
+      Self_::split("self"),
+      Some(("self".to_string(), "".to_string()))
+    );
   }
 
   #[test]
   fn test_default() {
-    assert_eq!(Nil::default(), Nil {});
+    assert_eq!(Self_::default(), Self_ {});
   }
 
   #[test]
   fn test_node_from() {
-    assert_eq!(Token::from(Nil::new()), Token::Nil);
+    assert_eq!(Token::from(Self_::new()), Token::Self_);
   }
 
   #[test]
   fn test_lex() {
-    assert_eq!(Nil::lex("nil"), Some((Token::Nil, "".to_string())));
+    assert_eq!(Self_::lex("self"), Some((Token::Self_, "".to_string())));
   }
 }
