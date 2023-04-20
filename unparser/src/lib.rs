@@ -5,7 +5,7 @@ use {crate::unparse::Unparse, parser::parse};
 mod false_;
 mod node;
 mod true_;
-mod unparse;
+pub mod unparse;
 
 fn parse_unparse(input: &str) -> String {
   parse(input).unparse()
