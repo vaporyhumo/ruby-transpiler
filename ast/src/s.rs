@@ -4,6 +4,9 @@ macro_rules! s {
   (false) => {
     False::new()
   };
+  (nil) => {
+    Nil::new()
+  };
   (true) => {
     True::new()
   };
@@ -11,15 +14,12 @@ macro_rules! s {
 
 #[cfg(test)]
 mod tests {
-  use crate::{false_::False, true_::True};
+  use crate::{false_::False, nil::Nil, true_::True};
 
   #[test]
-  fn test_false() {
+  fn test_s() {
     assert_eq!(s!(false), False {});
-  }
-
-  #[test]
-  fn test_true() {
+    assert_eq!(s!(nil), Nil {});
     assert_eq!(s!(true), True {});
   }
 }

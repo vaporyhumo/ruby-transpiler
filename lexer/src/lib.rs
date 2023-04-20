@@ -1,18 +1,20 @@
-use {false_::False, true_::True};
+use {false_::False, nil::Nil, true_::True};
 
 mod false_;
+mod nil;
 mod split;
 mod true_;
 
 #[derive(Debug, PartialEq)]
 pub enum Token {
   False,
+  Nil,
   True,
 }
 
 impl Token {
   fn lex_token(string: &str) -> Option<(Token, String)> {
-    False::lex(string).or(True::lex(string))
+    False::lex(string).or(True::lex(string)).or(Nil::lex(string))
   }
 
   pub fn lex(string: &str) -> Vec<Token> {
@@ -41,6 +43,7 @@ mod tests {
   #[test]
   fn test_lex() {
     assert_eq!(Token::lex("false"), vec![Token::False]);
+    assert_eq!(Token::lex("nil"), vec![Token::Nil]);
     assert_eq!(Token::lex("true"), vec![Token::True]);
   }
 }

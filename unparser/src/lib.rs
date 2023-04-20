@@ -3,6 +3,7 @@
 use {crate::unparse::Unparse, parser::parse};
 
 mod false_;
+mod nil;
 mod node;
 mod true_;
 pub mod unparse;
@@ -18,6 +19,7 @@ mod tests {
   #[test]
   fn it_works() {
     assert_eq!(parse_unparse("false"), "false");
+    assert_eq!(parse_unparse("nil"), "nil");
     assert_eq!(parse_unparse("true"), "true");
   }
 }
