@@ -6,7 +6,9 @@ mod false_;
 mod node;
 mod unparse;
 
-fn parse_unparse(input: &str) -> String { parse(input).unparse() }
+fn parse_unparse(input: &str) -> String {
+  parse(input).unparse()
+}
 
 #[cfg(test)]
 mod tests {

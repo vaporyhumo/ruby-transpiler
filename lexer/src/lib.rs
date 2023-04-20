@@ -9,7 +9,9 @@ pub enum Token {
 }
 
 impl Token {
-  fn lex_token(string: &str) -> Option<(Token, String)> { False::lex(string) }
+  fn lex_token(string: &str) -> Option<(Token, String)> {
+    False::lex(string)
+  }
 
   pub fn lex(string: &str) -> Vec<Token> {
     let mut tokens: Vec<Token> = Vec::new();
@@ -35,5 +37,7 @@ mod tests {
   use super::*;
 
   #[test]
-  fn test_lex() { assert_eq!(Token::lex("false"), vec![Token::False]) }
+  fn test_lex() {
+    assert_eq!(Token::lex("false"), vec![Token::False])
+  }
 }

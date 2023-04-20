@@ -1,7 +1,7 @@
 use {
+  crate::parse::Parse,
   ast::{False, Node},
   lexer::Token,
-  crate::parse::Parse,
 };
 
 impl Parse for False {

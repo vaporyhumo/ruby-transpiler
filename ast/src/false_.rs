@@ -4,17 +4,25 @@ use crate::Node;
 pub struct False {}
 
 impl False {
-  pub fn new() -> Self { Self {} }
+  pub fn new() -> Self {
+    Self {}
+  }
 
-  pub fn node() -> Node { Node::False(Self::new()) }
+  pub fn node() -> Node {
+    Node::False(Self::new())
+  }
 }
 
 impl Default for False {
-  fn default() -> Self { Self::new() }
+  fn default() -> Self {
+    Self::new()
+  }
 }
 
 impl From<False> for Node {
-  fn from(_: False) -> Self { False::node() }
+  fn from(_: False) -> Self {
+    False::node()
+  }
 }
 
 #[cfg(test)]

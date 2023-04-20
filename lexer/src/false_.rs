@@ -4,11 +4,17 @@ use crate::{split, Token};
 pub struct False {}
 
 impl False {
-  fn new() -> False { False {} }
+  fn new() -> False {
+    False {}
+  }
 
-  fn token() -> Token { Token::False }
+  fn token() -> Token {
+    Token::False
+  }
 
-  fn split(string: &str) -> Option<(String, String)> { split::split(string, "^false") }
+  fn split(string: &str) -> Option<(String, String)> {
+    split::split(string, "^false")
+  }
 
   pub fn lex(string: &str) -> Option<(Token, String)> {
     Self::split(string).map(|(_lexeme, rest)| (Self::token(), rest))
@@ -16,11 +22,15 @@ impl False {
 }
 
 impl Default for False {
-  fn default() -> Self { Self::new() }
+  fn default() -> Self {
+    Self::new()
+  }
 }
 
 impl From<False> for Token {
-  fn from(_: False) -> Self { False::token() }
+  fn from(_: False) -> Self {
+    False::token()
+  }
 }
 
 #[cfg(test)]
@@ -39,7 +49,10 @@ mod tests {
 
   #[test]
   fn test_split() {
-    assert_eq!(False::split("false"), Some(("false".to_string(), "".to_string())));
+    assert_eq!(
+      False::split("false"),
+      Some(("false".to_string(), "".to_string()))
+    );
   }
 
   #[test]
