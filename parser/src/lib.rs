@@ -1,12 +1,23 @@
-pub fn add(left: usize, right: usize) -> usize { left + right }
+use {
+  ast::{False, Node},
+  lexer::Token,
+  parse::Parse,
+};
+
+mod false_;
+mod parse;
+
+pub fn parse(string: &str) -> Node {
+  let tokens: Vec<Token> = Token::lex(string);
+  False::parse(&tokens).unwrap()
+}
 
 #[cfg(test)]
 mod tests {
-  use super::*;
+  use {super::*, ast::s};
 
   #[test]
-  fn it_works() {
-    let result = add(2, 2);
-    assert_eq!(result, 4);
+  fn test_false() {
+    assert_eq!(parse("false"), s!(false).into(),);
   }
 }

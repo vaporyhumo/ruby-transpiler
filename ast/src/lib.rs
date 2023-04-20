@@ -1,12 +1,11 @@
-pub fn add(left: usize, right: usize) -> usize { left + right }
+#![allow(dead_code)]
 
-#[cfg(test)]
-mod tests {
-  use super::*;
+pub use false_::False;
 
-  #[test]
-  fn it_works() {
-    let result = add(2, 2);
-    assert_eq!(result, 4);
-  }
+pub mod false_;
+pub mod s;
+
+#[derive(Debug, PartialEq)]
+pub enum Node {
+  False(False),
 }

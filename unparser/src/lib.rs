@@ -1,4 +1,12 @@
-pub fn add(left: usize, right: usize) -> usize { left + right }
+#![allow(dead_code)]
+
+use {crate::unparse::Unparse, parser::parse};
+
+mod false_;
+mod node;
+mod unparse;
+
+fn parse_unparse(input: &str) -> String { parse(input).unparse() }
 
 #[cfg(test)]
 mod tests {
@@ -6,7 +14,6 @@ mod tests {
 
   #[test]
   fn it_works() {
-    let result = add(2, 2);
-    assert_eq!(result, 4);
+    assert_eq!(parse_unparse("false"), "false");
   }
 }
