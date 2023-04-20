@@ -1,13 +1,13 @@
 use {
   crate::parse::Parse,
-  ast::{False, Node},
+  ast::{Node, True},
   lexer::Token,
 };
 
-impl Parse for False {
+impl Parse for True {
   fn parse(tokens: &[Token]) -> Option<Node> {
     tokens.first().and_then(|token| match token {
-      Token::False => Some(Self::node()),
+      Token::True => Some(Self::node()),
       _ => None,
     })
   }

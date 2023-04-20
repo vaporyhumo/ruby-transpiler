@@ -4,6 +4,7 @@ use {crate::unparse::Unparse, parser::parse};
 
 mod false_;
 mod node;
+mod true_;
 mod unparse;
 
 fn parse_unparse(input: &str) -> String {
@@ -17,5 +18,6 @@ mod tests {
   #[test]
   fn it_works() {
     assert_eq!(parse_unparse("false"), "false");
+    assert_eq!(parse_unparse("true"), "true");
   }
 }
