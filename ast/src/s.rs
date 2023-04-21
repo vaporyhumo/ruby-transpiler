@@ -19,6 +19,9 @@ macro_rules! s {
   (self) => {
     Self_::new()
   };
+  (sym, $s:literal) => {
+    Symbol::new($s)
+  };
   (send, nil, $s:literal) => {
     Send::new($s, None::<Id>)
   };
@@ -34,7 +37,7 @@ macro_rules! s {
 mod tests {
   use crate::{
     begin::Begin, false_::False, nil::Nil, self_::Self_, send::Send,
-    true_::True, Id,
+    true_::True, Id, Symbol,
   };
 
   #[test]
@@ -45,6 +48,7 @@ mod tests {
     assert_eq!(s!(nil), Nil {});
     assert_eq!(s!(self), Self_ {});
     assert_eq!(s!(send, nil, "puts"), Send::new("puts", None::<Id>));
+    assert_eq!(s!(sym, ":foo"), Symbol::new(":foo"));
     assert_eq!(s!(true), True {});
   }
 }

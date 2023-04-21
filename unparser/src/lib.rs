@@ -10,6 +10,7 @@ mod nil;
 mod node;
 mod self_;
 mod send;
+mod symbol;
 mod true_;
 pub mod unparse;
 
@@ -24,8 +25,10 @@ mod tests {
   #[test]
   fn it_works() {
     assert_eq!(parse_unparse("false"), "false");
+    assert_eq!(parse_unparse("foo"), "foo");
     assert_eq!(parse_unparse("nil"), "nil");
     assert_eq!(parse_unparse("self"), "self");
+    assert_eq!(parse_unparse(":sym"), ":sym");
     assert_eq!(parse_unparse("true"), "true");
     assert_eq!(parse_unparse("hello \"world\""), "hello \"world\"");
   }

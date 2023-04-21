@@ -10,6 +10,7 @@ impl Unparse for Node {
       Node::Nil(nil) => nil.unparse(),
       Node::Self_(self_) => self_.unparse(),
       Node::Send(send) => send.unparse(),
+      Node::Symbol(symbol) => symbol.unparse(),
       Node::True(true_) => true_.unparse(),
     }
   }
