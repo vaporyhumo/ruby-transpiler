@@ -8,7 +8,7 @@ impl Self_ {
     Self_ {}
   }
 
-  fn token() -> Token {
+  pub fn token() -> Token {
     Token::Self_
   }
 

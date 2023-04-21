@@ -1,25 +1,37 @@
-use {false_::False, nil::Nil, self_::Self_, true_::True};
+use {
+  dstring::DString, false_::False, id::Id, nil::Nil, self_::Self_, true_::True,
+  wspace::WSpace,
+};
 
+mod dstring;
 mod false_;
+mod id;
 mod nil;
 mod self_;
 mod split;
 mod true_;
+mod wspace;
 
 #[derive(Debug, PartialEq)]
 pub enum Token {
+  DString(String),
   False,
+  Id(String),
   Nil,
   Self_,
   True,
+  WSpace(String),
 }
 
 impl Token {
   fn lex_token(string: &str) -> Option<(Token, String)> {
-    False::lex(string)
+    WSpace::lex(string)
+      .or(False::lex(string))
       .or(True::lex(string))
       .or(Nil::lex(string))
       .or(Self_::lex(string))
+      .or(Id::lex(string))
+      .or(DString::lex(string))
   }
 
   pub fn lex(string: &str) -> Vec<Token> {
@@ -47,8 +59,12 @@ mod tests {
 
   #[test]
   fn test_lex() {
-    assert_eq!(Token::lex("false"), vec![Token::False]);
-    assert_eq!(Token::lex("nil"), vec![Token::Nil]);
-    assert_eq!(Token::lex("true"), vec![Token::True]);
+    assert_eq!(Token::lex("false"), vec![False::token()]);
+    assert_eq!(Token::lex("nil"), vec![Nil::token()]);
+    assert_eq!(Token::lex("true"), vec![True::token()]);
+    assert_eq!(Token::lex("self"), vec![Self_::token()]);
+    assert_eq!(Token::lex("hello"), vec![Id::token("hello")]);
+    assert_eq!(Token::lex("\"hello\""), vec![DString::token("\"hello\"")]);
+    assert_eq!(Token::lex(" "), vec![WSpace::token(" ")]);
   }
 }

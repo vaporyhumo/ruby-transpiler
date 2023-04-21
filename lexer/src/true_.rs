@@ -8,7 +8,7 @@ impl True {
     True {}
   }
 
-  fn token() -> Token {
+  pub fn token() -> Token {
     Token::True
   }
 

@@ -8,7 +8,7 @@ impl Nil {
     Nil {}
   }
 
-  fn token() -> Token {
+  pub fn token() -> Token {
     Token::Nil
   }
 

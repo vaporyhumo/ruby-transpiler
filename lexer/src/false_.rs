@@ -8,7 +8,7 @@ impl False {
     False {}
   }
 
-  fn token() -> Token {
+  pub fn token() -> Token {
     Token::False
   }
 
