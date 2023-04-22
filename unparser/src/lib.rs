@@ -3,6 +3,7 @@
 use {crate::unparse::Unparse, parser::parse};
 
 mod begin;
+mod const_;
 mod dstr;
 mod false_;
 mod id;
@@ -29,6 +30,7 @@ mod tests {
     assert_eq!(parse_unparse("-1234567890"), "-1234567890");
     assert_eq!(parse_unparse("false"), "false");
     assert_eq!(parse_unparse("foo"), "foo");
+    assert_eq!(parse_unparse("Foo"), "Foo");
     assert_eq!(parse_unparse("nil"), "nil");
     assert_eq!(parse_unparse("self"), "self");
     assert_eq!(parse_unparse(":sym"), ":sym");

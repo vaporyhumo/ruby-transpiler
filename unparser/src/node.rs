@@ -4,6 +4,7 @@ impl Unparse for Node {
   fn unparse(&self) -> String {
     match self {
       Node::Begin(begin) => begin.unparse(),
+      Node::Const(const_) => const_.unparse(),
       Node::Dstr(dstr) => dstr.unparse(),
       Node::False(false_) => false_.unparse(),
       Node::Id(id) => id.unparse(),

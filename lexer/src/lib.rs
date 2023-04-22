@@ -1,8 +1,9 @@
 use {
-  dstring::DString, false_::False, id::Id, int::Int, nil::Nil, self_::Self_, symbol::Symbol, true_::True,
+  const_::Const, dstring::DString, false_::False, id::Id, int::Int, nil::Nil, self_::Self_, symbol::Symbol, true_::True,
   wspace::WSpace,
 };
 
+mod const_;
 mod dstring;
 mod false_;
 mod id;
@@ -16,6 +17,7 @@ mod wspace;
 
 #[derive(Debug, PartialEq)]
 pub enum Token {
+  Const(String),
   DString(String),
   False,
   Id(String),
@@ -30,6 +32,7 @@ pub enum Token {
 impl Token {
   fn lex_token(string: &str) -> Option<(Token, String)> {
     WSpace::lex(string)
+      .or(Const::lex(string))
       .or(Int::lex(string))
       .or(False::lex(string))
       .or(True::lex(string))

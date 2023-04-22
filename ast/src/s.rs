@@ -4,6 +4,9 @@ macro_rules! s {
   (begin) => {
     Begin::new()
   };
+  (const, $s:literal) => {
+    Const::new($s)
+  };
   (dstr, $s:literal) => {
     Dstr::new($s)
   };
