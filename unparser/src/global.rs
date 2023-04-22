@@ -10,7 +10,7 @@ impl Unparse for Global {
 mod tests {
   use {
     super::*,
-    ast::{s, global::Global},
+    ast::{global::Global, s},
   };
 
   #[test]

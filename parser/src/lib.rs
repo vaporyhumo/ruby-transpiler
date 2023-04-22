@@ -47,7 +47,10 @@ pub fn parse(string: &str) -> Node {
 
 #[cfg(test)]
 mod tests {
-  use {super::*, ast::{Id, s}};
+  use {
+    super::*,
+    ast::{s, Id},
+  };
 
   #[test]
   fn test_parse() {
