@@ -1,12 +1,12 @@
 use crate::{Dstr, Id, Node};
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Send {
   pub method: String,
   pub argument: Option<SendArg>,
 }
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub enum SendArg {
   Id(Id),
   Dstr(Dstr),
@@ -26,9 +26,13 @@ impl From<Dstr> for SendArg {
 
 impl Send {
   pub fn new(method: &str, argument: Option<impl Into<SendArg>>) -> Self {
-    Self { method: method.to_string(), argument: argument.map(|a| a.into()) }
+    Self {
+      method: method.to_string(),
+      argument: argument.map(std::convert::Into::into),
+    }
   }
 
+  #[must_use]
   pub fn node(&self) -> Node {
     Node::Send(self.clone())
   }

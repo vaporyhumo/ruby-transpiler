@@ -15,6 +15,6 @@ mod tests {
 
   #[test]
   fn test_unparse() {
-    assert_eq!(s!(int, "1234567890").unparse(), "1234567890")
+    assert_eq!(s!(int, "1234567890").unparse(), "1234567890");
   }
 }

@@ -1,14 +1,16 @@
 use crate::Node;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct True {}
 
 impl True {
-  pub fn new() -> Self {
+  #[must_use]
+  pub const fn new() -> Self {
     Self {}
   }
 
-  pub fn node() -> Node {
+  #[must_use]
+  pub const fn node() -> Node {
     Node::True(Self::new())
   }
 }

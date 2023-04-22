@@ -1,15 +1,17 @@
 use crate::Node;
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Symbol {
   pub lexeme: String,
 }
 
 impl Symbol {
+  #[must_use]
   pub fn new(lexeme: &str) -> Self {
     Self { lexeme: lexeme.to_string() }
   }
 
+  #[must_use]
   pub fn node(lexeme: &str) -> Node {
     Node::Symbol(Self::new(lexeme))
   }

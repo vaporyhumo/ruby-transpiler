@@ -15,6 +15,6 @@ mod tests {
 
   #[test]
   fn test_unparse() {
-    assert_eq!(s!(self).unparse(), "self")
+    assert_eq!(s!(self).unparse(), "self");
   }
 }

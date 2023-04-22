@@ -17,7 +17,7 @@ mod symbol;
 mod true_;
 mod wspace;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum Token {
   Const(String),
   DString(String),
@@ -33,22 +33,26 @@ pub enum Token {
 }
 
 impl Token {
-  fn lex_token(string: &str) -> Option<(Token, String)> {
+  fn lex_token(string: &str) -> Option<(Self, String)> {
     WSpace::lex(string)
-      .or(Const::lex(string))
-      .or(Int::lex(string))
-      .or(False::lex(string))
-      .or(True::lex(string))
-      .or(Nil::lex(string))
-      .or(Self_::lex(string))
-      .or(Symbol::lex(string))
-      .or(Id::lex(string))
-      .or(Global::lex(string))
-      .or(DString::lex(string))
+      .or_else(|| Const::lex(string))
+      .or_else(|| Int::lex(string))
+      .or_else(|| False::lex(string))
+      .or_else(|| True::lex(string))
+      .or_else(|| Nil::lex(string))
+      .or_else(|| Self_::lex(string))
+      .or_else(|| Symbol::lex(string))
+      .or_else(|| Id::lex(string))
+      .or_else(|| Global::lex(string))
+      .or_else(|| DString::lex(string))
   }
 
-  pub fn lex(string: &str) -> Vec<Token> {
-    let mut tokens: Vec<Token> = Vec::new();
+  /// # Panics
+  ///
+  /// Will panic if there is an unexpected token.
+  #[must_use]
+  pub fn lex(string: &str) -> Vec<Self> {
+    let mut tokens: Vec<Self> = Vec::new();
     let mut string: String = string.to_string();
 
     loop {
@@ -60,7 +64,7 @@ impl Token {
           tokens.push(token);
           string = rest;
         }
-        None => panic!("Unexpected token: {}", string),
+        None => panic!("Unexpected token: {string}"),
       }
     }
   }

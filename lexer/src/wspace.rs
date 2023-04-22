@@ -1,13 +1,13 @@
 use crate::{split, Token};
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct WSpace {
   lexeme: String,
 }
 
 impl WSpace {
-  fn new(lexeme: &str) -> WSpace {
-    WSpace { lexeme: lexeme.to_string() }
+  fn new(lexeme: &str) -> Self {
+    Self { lexeme: lexeme.to_string() }
   }
 
   pub fn token(lexeme: &str) -> Token {
@@ -51,7 +51,7 @@ mod tests {
 
   #[test]
   fn test_split() {
-    assert_eq!(WSpace::split(" "), Some((" ".to_string(), "".to_string())));
+    assert_eq!(WSpace::split(" "), Some((" ".to_string(), String::new())));
   }
 
   #[test]
@@ -68,7 +68,7 @@ mod tests {
   fn test_lex() {
     assert_eq!(
       WSpace::lex(" "),
-      Some((Token::WSpace(" ".to_string()), "".to_string()))
+      Some((Token::WSpace(" ".to_string()), String::new()))
     );
   }
 }

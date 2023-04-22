@@ -13,7 +13,7 @@ fn main() {
   match read_and_print_file(filename) {
     Ok(()) => {}
     Err(e) => {
-      eprintln!("Error reading file: {}", e);
+      eprintln!("Error reading file: {e}");
       process::exit(1);
     }
   }
@@ -22,6 +22,6 @@ fn main() {
 fn read_and_print_file(filename: &str) -> Result<(), std::io::Error> {
   let content = fs::read_to_string(filename)?;
   let content = parse(&content).unparse();
-  println!("{}", content);
+  println!("{content}");
   Ok(())
 }

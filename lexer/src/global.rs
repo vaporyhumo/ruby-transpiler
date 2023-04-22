@@ -1,13 +1,13 @@
 use crate::{split, Token};
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct Global {
   lexeme: String,
 }
 
 impl Global {
-  fn new(lexeme: &str) -> Global {
-    Global { lexeme: lexeme.to_string() }
+  fn new(lexeme: &str) -> Self {
+    Self { lexeme: lexeme.to_string() }
   }
 
   pub fn token(lexeme: &str) -> Token {
@@ -53,7 +53,7 @@ mod tests {
   fn test_split() {
     assert_eq!(
       Global::split("$foo"),
-      Some(("$foo".to_string(), "".to_string()))
+      Some(("$foo".to_string(), String::new()))
     );
   }
 
@@ -74,7 +74,7 @@ mod tests {
   fn test_lex() {
     assert_eq!(
       Global::lex("$foo"),
-      Some((Global::token("$foo"), "".to_string()))
+      Some((Global::token("$foo"), String::new()))
     );
   }
 }

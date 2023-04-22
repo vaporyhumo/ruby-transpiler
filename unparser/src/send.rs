@@ -4,10 +4,10 @@ use {crate::unparse::Unparse, ast::Send};
 
 impl Unparse for Send {
   fn unparse(&self) -> String {
-    match &self.argument {
-      Some(argument) => format!("{} {}", self.method, argument.unparse()),
-      None => self.method.to_string(),
-    }
+    self.argument.as_ref().map_or_else(
+      || self.method.to_string(),
+      |argument| format!("{} {}", self.method, argument.unparse()),
+    )
   }
 }
 
@@ -31,6 +31,6 @@ mod tests {
 
   #[test]
   fn test_unparse() {
-    assert_eq!(s!(send, nil, "puts").unparse(), "puts")
+    assert_eq!(s!(send, nil, "puts").unparse(), "puts");
   }
 }

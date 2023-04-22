@@ -1,14 +1,14 @@
 use crate::{split, Token};
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct True {}
 
 impl True {
-  fn new() -> True {
-    True {}
+  const fn new() -> Self {
+    Self {}
   }
 
-  pub fn token() -> Token {
+  pub const fn token() -> Token {
     Token::True
   }
 
@@ -49,7 +49,7 @@ mod tests {
 
   #[test]
   fn test_split() {
-    assert_eq!(True::split("true"), Some(("true".to_string(), "".to_string())));
+    assert_eq!(True::split("true"), Some(("true".to_string(), String::new())));
   }
 
   #[test]
@@ -64,6 +64,6 @@ mod tests {
 
   #[test]
   fn test_lex() {
-    assert_eq!(True::lex("true"), Some((Token::True, "".to_string())));
+    assert_eq!(True::lex("true"), Some((Token::True, String::new())));
   }
 }

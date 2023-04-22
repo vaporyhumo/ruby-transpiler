@@ -20,29 +20,29 @@ mod send;
 mod symbol;
 mod true_;
 
-fn is_whitespace(token: &Token) -> bool {
-  match token {
-    Token::WSpace(_) => false,
-    _ => true,
-  }
+const fn is_whitespace(token: &Token) -> bool {
+  !matches!(token, Token::WSpace(_))
 }
 
+/// # Panics
+///
+/// Will panic if there is an unexpected token.
+#[must_use]
 pub fn parse(string: &str) -> Node {
   let tokens: Vec<Token> = Token::lex(string);
-  let tokens: Vec<Token> =
-    tokens.into_iter().filter(|t| is_whitespace(&t)).collect();
+  let tokens: Vec<Token> = tokens.into_iter().filter(is_whitespace).collect();
   False::parse(&tokens)
-    .or(Const::parse(&tokens))
-    .or(Global::parse(&tokens))
-    .or(Int::parse(&tokens))
-    .or(True::parse(&tokens))
-    .or(Nil::parse(&tokens))
-    .or(Self_::parse(&tokens))
-    .or(Symbol::parse(&tokens))
-    .or(Dstr::parse(&tokens))
-    .or(Begin::parse(&tokens))
-    .or(Send::parse(&tokens))
-    .expect(format!("Unexpected token: {:?}", tokens).as_str())
+    .or_else(|| Const::parse(&tokens))
+    .or_else(|| Global::parse(&tokens))
+    .or_else(|| Int::parse(&tokens))
+    .or_else(|| True::parse(&tokens))
+    .or_else(|| Nil::parse(&tokens))
+    .or_else(|| Self_::parse(&tokens))
+    .or_else(|| Symbol::parse(&tokens))
+    .or_else(|| Dstr::parse(&tokens))
+    .or_else(|| Begin::parse(&tokens))
+    .or_else(|| Send::parse(&tokens))
+    .unwrap_or_else(|| panic!("Unexpected token: {tokens:?}"))
 }
 
 #[cfg(test)]

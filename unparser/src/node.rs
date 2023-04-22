@@ -3,18 +3,18 @@ use {crate::unparse::Unparse, ast::Node};
 impl Unparse for Node {
   fn unparse(&self) -> String {
     match self {
-      Node::Begin(begin) => begin.unparse(),
-      Node::Const(const_) => const_.unparse(),
-      Node::Dstr(dstr) => dstr.unparse(),
-      Node::False(false_) => false_.unparse(),
-      Node::Global(global) => global.unparse(),
-      Node::Id(id) => id.unparse(),
-      Node::Int(int) => int.unparse(),
-      Node::Nil(nil) => nil.unparse(),
-      Node::Self_(self_) => self_.unparse(),
-      Node::Send(send) => send.unparse(),
-      Node::Symbol(symbol) => symbol.unparse(),
-      Node::True(true_) => true_.unparse(),
+      Self::Begin(begin) => begin.unparse(),
+      Self::Const(const_) => const_.unparse(),
+      Self::Dstr(dstr) => dstr.unparse(),
+      Self::False(false_) => false_.unparse(),
+      Self::Global(global) => global.unparse(),
+      Self::Id(id) => id.unparse(),
+      Self::Int(int) => int.unparse(),
+      Self::Nil(nil) => nil.unparse(),
+      Self::Self_(self_) => self_.unparse(),
+      Self::Send(send) => send.unparse(),
+      Self::Symbol(symbol) => symbol.unparse(),
+      Self::True(true_) => true_.unparse(),
     }
   }
 }

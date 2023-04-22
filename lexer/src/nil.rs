@@ -1,14 +1,14 @@
 use crate::{split, Token};
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct Nil {}
 
 impl Nil {
-  fn new() -> Nil {
-    Nil {}
+  const fn new() -> Self {
+    Self {}
   }
 
-  pub fn token() -> Token {
+  pub const fn token() -> Token {
     Token::Nil
   }
 
@@ -49,7 +49,7 @@ mod tests {
 
   #[test]
   fn test_split() {
-    assert_eq!(Nil::split("nil"), Some(("nil".to_string(), "".to_string())));
+    assert_eq!(Nil::split("nil"), Some(("nil".to_string(), String::new())));
   }
 
   #[test]
@@ -64,6 +64,6 @@ mod tests {
 
   #[test]
   fn test_lex() {
-    assert_eq!(Nil::lex("nil"), Some((Token::Nil, "".to_string())));
+    assert_eq!(Nil::lex("nil"), Some((Token::Nil, String::new())));
   }
 }

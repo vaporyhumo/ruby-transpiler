@@ -20,7 +20,7 @@ pub mod send;
 pub mod symbol;
 pub mod true_;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum Node {
   Begin(Begin),
   Const(Const),

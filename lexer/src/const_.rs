@@ -1,13 +1,13 @@
 use crate::{split, Token};
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct Const {
   lexeme: String,
 }
 
 impl Const {
-  fn new(lexeme: &str) -> Const {
-    Const { lexeme: lexeme.to_string() }
+  fn new(lexeme: &str) -> Self {
+    Self { lexeme: lexeme.to_string() }
   }
 
   pub fn token(lexeme: &str) -> Token {
@@ -51,7 +51,7 @@ mod tests {
 
   #[test]
   fn test_split() {
-    assert_eq!(Const::split("Foo"), Some(("Foo".to_string(), "".to_string())));
+    assert_eq!(Const::split("Foo"), Some(("Foo".to_string(), String::new())));
   }
 
   #[test]
@@ -66,6 +66,6 @@ mod tests {
 
   #[test]
   fn test_lex() {
-    assert_eq!(Const::lex("Foo"), Some((Const::token("Foo"), "".to_string())));
+    assert_eq!(Const::lex("Foo"), Some((Const::token("Foo"), String::new())));
   }
 }

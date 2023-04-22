@@ -15,6 +15,6 @@ mod tests {
 
   #[test]
   fn test_unparse() {
-    assert_eq!(s!(nil).unparse(), "nil")
+    assert_eq!(s!(nil).unparse(), "nil");
   }
 }

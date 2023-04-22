@@ -1,15 +1,17 @@
 use crate::Node;
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Const {
   pub name: String,
 }
 
 impl Const {
+  #[must_use]
   pub fn new(name: &str) -> Self {
     Self { name: name.to_string() }
   }
 
+  #[must_use]
   pub fn node(name: &str) -> Node {
     Node::Const(Self::new(name))
   }

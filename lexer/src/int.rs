@@ -1,13 +1,13 @@
 use crate::{split, Token};
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct Int {
   lexeme: String,
 }
 
 impl Int {
-  fn new(lexeme: &str) -> Int {
-    Int { lexeme: lexeme.to_string() }
+  fn new(lexeme: &str) -> Self {
+    Self { lexeme: lexeme.to_string() }
   }
 
   pub fn token(lexeme: &str) -> Token {
@@ -56,7 +56,7 @@ mod tests {
   fn test_split() {
     assert_eq!(
       Int::split("1234567890"),
-      Some(("1234567890".to_string(), "".to_string()))
+      Some(("1234567890".to_string(), String::new()))
     );
   }
 
@@ -77,7 +77,7 @@ mod tests {
   fn test_lex() {
     assert_eq!(
       Int::lex("1234567890"),
-      Some((Int::token("1234567890"), "".to_string()))
+      Some((Int::token("1234567890"), String::new()))
     );
   }
 }
