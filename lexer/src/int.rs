@@ -41,7 +41,10 @@ mod tests {
 
   #[test]
   fn test_new() {
-    assert_eq!(Int::new("1234567890"), Int { lexeme: "1234567890".to_string() });
+    assert_eq!(
+      Int::new("1234567890"),
+      Int { lexeme: "1234567890".to_string() }
+    );
   }
 
   #[test]
@@ -51,7 +54,10 @@ mod tests {
 
   #[test]
   fn test_split() {
-    assert_eq!(Int::split("1234567890"), Some(("1234567890".to_string(), "".to_string())));
+    assert_eq!(
+      Int::split("1234567890"),
+      Some(("1234567890".to_string(), "".to_string()))
+    );
   }
 
   #[test]
@@ -61,11 +67,17 @@ mod tests {
 
   #[test]
   fn test_node_from() {
-    assert_eq!(Token::from(Int::new("1234567890")), Token::Int("1234567890".to_string()));
+    assert_eq!(
+      Token::from(Int::new("1234567890")),
+      Token::Int("1234567890".to_string())
+    );
   }
 
   #[test]
   fn test_lex() {
-    assert_eq!(Int::lex("1234567890"), Some((Int::token("1234567890"), "".to_string())));
+    assert_eq!(
+      Int::lex("1234567890"),
+      Some((Int::token("1234567890"), "".to_string()))
+    );
   }
 }

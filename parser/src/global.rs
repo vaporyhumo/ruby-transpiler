@@ -1,13 +1,13 @@
 use {
   crate::parse::Parse,
-  ast::{Const, Node},
+  ast::{Global, Node},
   lexer::Token,
 };
 
-impl Parse for Const {
+impl Parse for Global {
   fn parse(tokens: &[Token]) -> Option<Node> {
     tokens.first().and_then(|token| match token {
-      Token::Const(lexeme) => Some(Self::node(&lexeme)),
+      Token::Global(lexeme) => Some(Self::node(&lexeme)),
       _ => None,
     })
   }

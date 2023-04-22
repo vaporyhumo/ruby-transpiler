@@ -1,6 +1,6 @@
 use {
   crate::parse::Parse,
-  ast::{Node, Int},
+  ast::{Int, Node},
   lexer::Token,
 };
 

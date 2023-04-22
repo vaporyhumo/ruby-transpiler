@@ -1,4 +1,4 @@
-use ast::{send::SendArg, Dstr, Id};
+use ast::{Dstr, Id};
 
 use {
   crate::parse::Parse,

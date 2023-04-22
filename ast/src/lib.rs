@@ -1,14 +1,16 @@
 #![allow(dead_code)]
 
 pub use {
-  begin::Begin, const_::Const, dstr::Dstr, false_::False, id::Id, int::Int, nil::Nil, self_::Self_,
-  send::Send, symbol::Symbol, true_::True,
+  begin::Begin, const_::Const, dstr::Dstr, false_::False, global::Global,
+  id::Id, int::Int, nil::Nil, self_::Self_, send::Send, symbol::Symbol,
+  true_::True,
 };
 
 pub mod begin;
 pub mod const_;
 pub mod dstr;
 pub mod false_;
+pub mod global;
 pub mod id;
 pub mod int;
 pub mod nil;
@@ -24,6 +26,7 @@ pub enum Node {
   Const(Const),
   Dstr(Dstr),
   False(False),
+  Global(Global),
   Id(Id),
   Int(Int),
   Nil(Nil),

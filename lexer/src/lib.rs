@@ -1,11 +1,13 @@
 use {
-  const_::Const, dstring::DString, false_::False, id::Id, int::Int, nil::Nil, self_::Self_, symbol::Symbol, true_::True,
+  const_::Const, dstring::DString, false_::False, global::Global, id::Id,
+  int::Int, nil::Nil, self_::Self_, symbol::Symbol, true_::True,
   wspace::WSpace,
 };
 
 mod const_;
 mod dstring;
 mod false_;
+mod global;
 mod id;
 mod int;
 mod nil;
@@ -20,6 +22,7 @@ pub enum Token {
   Const(String),
   DString(String),
   False,
+  Global(String),
   Id(String),
   Int(String),
   Nil,
@@ -40,6 +43,7 @@ impl Token {
       .or(Self_::lex(string))
       .or(Symbol::lex(string))
       .or(Id::lex(string))
+      .or(Global::lex(string))
       .or(DString::lex(string))
   }
 
@@ -64,10 +68,7 @@ impl Token {
 
 #[cfg(test)]
 mod tests {
-  use {
-    super::*,
-  };
-
+  use super::*;
 
   #[test]
   fn test_lex() {
@@ -81,7 +82,10 @@ mod tests {
     assert_eq!(lex(":sym"), vec![Symbol::token(":sym")]);
     assert_eq!(lex("hello"), vec![Id::token("hello")]);
     assert_eq!(lex("\"hello\""), vec![DString::token("\"hello\"")]);
-    assert_eq!(lex("puts \"hello\""), vec![Id::token("puts"), WSpace::token(" "), DString::token("\"hello\"")]);
+    assert_eq!(
+      lex("puts \"hello\""),
+      vec![Id::token("puts"), WSpace::token(" "), DString::token("\"hello\"")]
+    );
     assert_eq!(lex(" "), vec![WSpace::token(" ")]);
   }
 }

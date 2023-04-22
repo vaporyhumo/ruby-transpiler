@@ -13,6 +13,9 @@ macro_rules! s {
   (false) => {
     False::new()
   };
+  (global $s:literal) => {
+    Global::new($s)
+  };
   (id, $s:literal) => {
     Id::new($s)
   };

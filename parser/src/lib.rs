@@ -1,5 +1,8 @@
 use {
-  ast::{Begin, Const, Dstr, False, Id, Int, Nil, Node, Self_, Send, Symbol, True},
+  ast::{
+    Begin, Const, Dstr, False, Global, Int, Nil, Node, Self_, Send, Symbol,
+    True,
+  },
   lexer::Token,
   parse::Parse,
 };
@@ -8,6 +11,7 @@ mod begin;
 mod const_;
 mod dstr;
 mod false_;
+mod global;
 mod int;
 mod nil;
 mod parse;
@@ -29,6 +33,7 @@ pub fn parse(string: &str) -> Node {
     tokens.into_iter().filter(|t| is_whitespace(&t)).collect();
   False::parse(&tokens)
     .or(Const::parse(&tokens))
+    .or(Global::parse(&tokens))
     .or(Int::parse(&tokens))
     .or(True::parse(&tokens))
     .or(Nil::parse(&tokens))
@@ -42,7 +47,7 @@ pub fn parse(string: &str) -> Node {
 
 #[cfg(test)]
 mod tests {
-  use {super::*, ast::s};
+  use {super::*, ast::{Id, s}};
 
   #[test]
   fn test_parse() {

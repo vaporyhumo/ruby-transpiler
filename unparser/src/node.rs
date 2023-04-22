@@ -7,6 +7,7 @@ impl Unparse for Node {
       Node::Const(const_) => const_.unparse(),
       Node::Dstr(dstr) => dstr.unparse(),
       Node::False(false_) => false_.unparse(),
+      Node::Global(global) => global.unparse(),
       Node::Id(id) => id.unparse(),
       Node::Int(int) => int.unparse(),
       Node::Nil(nil) => nil.unparse(),

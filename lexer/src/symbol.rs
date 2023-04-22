@@ -51,7 +51,10 @@ mod tests {
 
   #[test]
   fn test_split() {
-    assert_eq!(Symbol::split(":foo"), Some((":foo".to_string(), "".to_string())));
+    assert_eq!(
+      Symbol::split(":foo"),
+      Some((":foo".to_string(), "".to_string()))
+    );
   }
 
   #[test]
@@ -61,11 +64,17 @@ mod tests {
 
   #[test]
   fn test_node_from() {
-    assert_eq!(Token::from(Symbol::new(":foo")), Token::Symbol(":foo".to_string()));
+    assert_eq!(
+      Token::from(Symbol::new(":foo")),
+      Token::Symbol(":foo".to_string())
+    );
   }
 
   #[test]
   fn test_lex() {
-    assert_eq!(Symbol::lex(":foo"), Some((Symbol::token(":foo"), "".to_string())));
+    assert_eq!(
+      Symbol::lex(":foo"),
+      Some((Symbol::token(":foo"), "".to_string()))
+    );
   }
 }
