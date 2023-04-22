@@ -10,6 +10,7 @@ impl Unparse for Node {
       Self::Global(global) => global.unparse(),
       Self::Id(id) => id.unparse(),
       Self::Int(int) => int.unparse(),
+      Self::Module(module) => module.unparse(),
       Self::Nil(nil) => nil.unparse(),
       Self::Self_(self_) => self_.unparse(),
       Self::Send(send) => send.unparse(),

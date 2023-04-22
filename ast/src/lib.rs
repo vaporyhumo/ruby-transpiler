@@ -2,8 +2,8 @@
 
 pub use {
   begin::Begin, const_::Const, dstr::Dstr, false_::False, global::Global,
-  id::Id, int::Int, nil::Nil, self_::Self_, send::Send, symbol::Symbol,
-  true_::True,
+  id::Id, int::Int, module::Module, nil::Nil, self_::Self_, send::Send,
+  symbol::Symbol, true_::True,
 };
 
 pub mod begin;
@@ -13,6 +13,7 @@ pub mod false_;
 pub mod global;
 pub mod id;
 pub mod int;
+pub mod module;
 pub mod nil;
 pub mod s;
 pub mod self_;
@@ -29,6 +30,7 @@ pub enum Node {
   Global(Global),
   Id(Id),
   Int(Int),
+  Module(Module),
   Nil(Nil),
   Self_(Self_),
   Send(Send),

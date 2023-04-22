@@ -15,6 +15,6 @@ mod tests {
 
   #[test]
   fn test_unparse() {
-    assert_eq!(s!(const, "Foo").unparse(), "Foo");
+    assert_eq!(s!(const "Foo").unparse(), "Foo");
   }
 }

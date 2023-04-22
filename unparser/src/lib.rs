@@ -9,6 +9,7 @@ mod false_;
 mod global;
 mod id;
 mod int;
+mod module;
 mod nil;
 mod node;
 mod self_;
@@ -39,5 +40,6 @@ mod tests {
     assert_eq!(parse_unparse("true"), "true");
     assert_eq!(parse_unparse("hello \"world\""), "hello \"world\"");
     assert_eq!(parse_unparse("puts \"hello world\""), "puts \"hello world\"");
+    assert_eq!(parse_unparse("module Hola end"), "module Hola\nend");
   }
 }

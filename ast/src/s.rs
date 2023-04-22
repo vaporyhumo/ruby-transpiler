@@ -4,7 +4,7 @@ macro_rules! s {
   (begin) => {
     Begin::new()
   };
-  (const, $s:literal) => {
+  (const $s:literal) => {
     Const::new($s)
   };
   (dstr, $s:literal) => {
@@ -21,6 +21,9 @@ macro_rules! s {
   };
   (int, $s:literal) => {
     Int::new($s)
+  };
+  (module $s:expr, nil) => {
+    Module::new($s)
   };
   (nil) => {
     Nil::new()

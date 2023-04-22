@@ -1,7 +1,7 @@
 use {
   ast::{
-    Begin, Const, Dstr, False, Global, Int, Nil, Node, Self_, Send, Symbol,
-    True,
+    Begin, Const, Dstr, False, Global, Int, Module, Nil, Node, Self_, Send,
+    Symbol, True,
   },
   lexer::Token,
   parse::Parse,
@@ -13,6 +13,7 @@ mod dstr;
 mod false_;
 mod global;
 mod int;
+mod module;
 mod nil;
 mod parse;
 mod self_;
@@ -40,6 +41,7 @@ pub fn parse(string: &str) -> Node {
     .or_else(|| Self_::parse(&tokens))
     .or_else(|| Symbol::parse(&tokens))
     .or_else(|| Dstr::parse(&tokens))
+    .or_else(|| Module::parse(&tokens))
     .or_else(|| Begin::parse(&tokens))
     .or_else(|| Send::parse(&tokens))
     .unwrap_or_else(|| panic!("Unexpected token: {tokens:?}"))
@@ -66,6 +68,10 @@ mod tests {
     assert_eq!(
       parse("puts \"hello world\""),
       s!(send, nil, "puts", s!(dstr, "\"hello world\"")).into()
+    );
+    assert_eq!(
+      parse("module Hola end"),
+      s!(module s!(const "Hola"), nil).into(),
     );
   }
 }
