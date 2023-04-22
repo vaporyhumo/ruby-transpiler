@@ -7,6 +7,7 @@ impl Unparse for Node {
       Node::Dstr(dstr) => dstr.unparse(),
       Node::False(false_) => false_.unparse(),
       Node::Id(id) => id.unparse(),
+      Node::Int(int) => int.unparse(),
       Node::Nil(nil) => nil.unparse(),
       Node::Self_(self_) => self_.unparse(),
       Node::Send(send) => send.unparse(),

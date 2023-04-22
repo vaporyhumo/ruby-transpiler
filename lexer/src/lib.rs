@@ -1,11 +1,12 @@
 use {
-  dstring::DString, false_::False, id::Id, nil::Nil, self_::Self_, symbol::Symbol, true_::True,
+  dstring::DString, false_::False, id::Id, int::Int, nil::Nil, self_::Self_, symbol::Symbol, true_::True,
   wspace::WSpace,
 };
 
 mod dstring;
 mod false_;
 mod id;
+mod int;
 mod nil;
 mod self_;
 mod split;
@@ -18,6 +19,7 @@ pub enum Token {
   DString(String),
   False,
   Id(String),
+  Int(String),
   Nil,
   Self_,
   Symbol(String),
@@ -28,6 +30,7 @@ pub enum Token {
 impl Token {
   fn lex_token(string: &str) -> Option<(Token, String)> {
     WSpace::lex(string)
+      .or(Int::lex(string))
       .or(False::lex(string))
       .or(True::lex(string))
       .or(Nil::lex(string))
@@ -58,17 +61,24 @@ impl Token {
 
 #[cfg(test)]
 mod tests {
-  use super::*;
+  use {
+    super::*,
+  };
+
 
   #[test]
   fn test_lex() {
-    assert_eq!(Token::lex("false"), vec![False::token()]);
-    assert_eq!(Token::lex("nil"), vec![Nil::token()]);
-    assert_eq!(Token::lex("true"), vec![True::token()]);
-    assert_eq!(Token::lex("self"), vec![Self_::token()]);
-    assert_eq!(Token::lex(":sym"), vec![Symbol::token(":sym")]);
-    assert_eq!(Token::lex("hello"), vec![Id::token("hello")]);
-    assert_eq!(Token::lex("\"hello\""), vec![DString::token("\"hello\"")]);
-    assert_eq!(Token::lex(" "), vec![WSpace::token(" ")]);
+    let lex = Token::lex;
+    assert_eq!(lex("1234567890"), vec![Int::token("1234567890")]);
+    assert_eq!(lex("-1234567890"), vec![Int::token("-1234567890")]);
+    assert_eq!(lex("false"), vec![False::token()]);
+    assert_eq!(lex("nil"), vec![Nil::token()]);
+    assert_eq!(lex("true"), vec![True::token()]);
+    assert_eq!(lex("self"), vec![Self_::token()]);
+    assert_eq!(lex(":sym"), vec![Symbol::token(":sym")]);
+    assert_eq!(lex("hello"), vec![Id::token("hello")]);
+    assert_eq!(lex("\"hello\""), vec![DString::token("\"hello\"")]);
+    assert_eq!(lex("puts \"hello\""), vec![Id::token("puts"), WSpace::token(" "), DString::token("\"hello\"")]);
+    assert_eq!(lex(" "), vec![WSpace::token(" ")]);
   }
 }

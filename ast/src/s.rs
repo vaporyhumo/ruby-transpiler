@@ -13,6 +13,9 @@ macro_rules! s {
   (id, $s:literal) => {
     Id::new($s)
   };
+  (int, $s:literal) => {
+    Int::new($s)
+  };
   (nil) => {
     Nil::new()
   };

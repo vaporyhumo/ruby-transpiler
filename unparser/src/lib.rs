@@ -6,6 +6,7 @@ mod begin;
 mod dstr;
 mod false_;
 mod id;
+mod int;
 mod nil;
 mod node;
 mod self_;
@@ -24,6 +25,8 @@ mod tests {
 
   #[test]
   fn it_works() {
+    assert_eq!(parse_unparse("1234567890"), "1234567890");
+    assert_eq!(parse_unparse("-1234567890"), "-1234567890");
     assert_eq!(parse_unparse("false"), "false");
     assert_eq!(parse_unparse("foo"), "foo");
     assert_eq!(parse_unparse("nil"), "nil");
@@ -31,5 +34,6 @@ mod tests {
     assert_eq!(parse_unparse(":sym"), ":sym");
     assert_eq!(parse_unparse("true"), "true");
     assert_eq!(parse_unparse("hello \"world\""), "hello \"world\"");
+    assert_eq!(parse_unparse("puts \"hello world\""), "puts \"hello world\"");
   }
 }

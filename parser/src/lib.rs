@@ -1,5 +1,5 @@
 use {
-  ast::{Begin, Dstr, False, Id, Nil, Node, Self_, Send, Symbol, True},
+  ast::{Begin, Dstr, False, Id, Int, Nil, Node, Self_, Send, Symbol, True},
   lexer::Token,
   parse::Parse,
 };
@@ -7,6 +7,7 @@ use {
 mod begin;
 mod dstr;
 mod false_;
+mod int;
 mod nil;
 mod parse;
 mod self_;
@@ -26,6 +27,7 @@ pub fn parse(string: &str) -> Node {
   let tokens: Vec<Token> =
     tokens.into_iter().filter(|t| is_whitespace(&t)).collect();
   False::parse(&tokens)
+    .or(Int::parse(&tokens))
     .or(True::parse(&tokens))
     .or(Nil::parse(&tokens))
     .or(Self_::parse(&tokens))
@@ -42,6 +44,8 @@ mod tests {
 
   #[test]
   fn test_parse() {
+    assert_eq!(parse("1234567890"), s!(int, "1234567890").into());
+    assert_eq!(parse("-1234567890"), s!(int, "-1234567890").into());
     assert_eq!(parse("false"), s!(false).into());
     assert_eq!(parse("nil"), s!(nil).into());
     assert_eq!(parse("self"), s!(self).into());
