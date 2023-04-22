@@ -70,7 +70,13 @@ impl Token {
           tokens.push(token);
           string = rest;
         }
-        None => panic!("Unexpected token: {string}"),
+        None => {
+          if string == "\n" {
+            panic!("Unexpected token: \\n")
+          } else {
+            panic!("Unexpected token: {string}")
+          }
+        }
       }
     }
   }
