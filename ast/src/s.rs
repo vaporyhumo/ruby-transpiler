@@ -25,6 +25,9 @@ macro_rules! s {
   (int, $s:literal) => {
     Int::new($s)
   };
+  (lvar $s:literal) => {
+    LVar::new($s)
+  };
   (module $s:expr, nil) => {
     Module::new($s)
   };

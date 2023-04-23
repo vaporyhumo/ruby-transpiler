@@ -1,6 +1,6 @@
 use {
   class::Class, const_::Const, dstring::DString, end::End, false_::False, global::Global,
-  id::Id, int::Int, module::Module, nil::Nil, self_::Self_, symbol::Symbol,
+  id::Id, int::Int, lvar::LVar, module::Module, nil::Nil, self_::Self_, symbol::Symbol,
   true_::True, wspace::WSpace,
 };
 
@@ -12,6 +12,7 @@ mod false_;
 mod global;
 mod id;
 mod int;
+mod lvar;
 mod module;
 mod nil;
 mod self_;
@@ -30,6 +31,7 @@ pub enum Token {
   Global(String),
   Id(String),
   Int(String),
+  LVar(String),
   Nil,
   Module,
   Self_,
@@ -47,6 +49,7 @@ impl Token {
       .or_else(|| True::lex(string))
       .or_else(|| Nil::lex(string))
       .or_else(|| Class::lex(string))
+      .or_else(|| LVar::lex(string))
       .or_else(|| Module::lex(string))
       .or_else(|| End::lex(string))
       .or_else(|| Self_::lex(string))

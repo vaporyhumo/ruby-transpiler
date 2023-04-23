@@ -10,6 +10,7 @@ mod false_;
 mod global;
 mod id;
 mod int;
+mod lvar;
 mod module;
 mod nil;
 mod node;
@@ -34,6 +35,7 @@ mod tests {
     assert_eq!(parse_unparse("false"), "false");
     assert_eq!(parse_unparse("foo"), "foo");
     assert_eq!(parse_unparse("$foo"), "$foo");
+    assert_eq!(parse_unparse("@foo"), "@foo");
     assert_eq!(parse_unparse("Foo"), "Foo");
     assert_eq!(parse_unparse("nil"), "nil");
     assert_eq!(parse_unparse("self"), "self");

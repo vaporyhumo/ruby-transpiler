@@ -1,6 +1,6 @@
 use {
   ast::{
-    Begin, Class, Const, Dstr, False, Global, Int, Module, Nil, Node, Self_, Send,
+    Begin, Class, Const, Dstr, False, Global, Int, LVar, Module, Nil, Node, Self_, Send,
     Symbol, True,
   },
   lexer::Token,
@@ -14,6 +14,7 @@ mod dstr;
 mod false_;
 mod global;
 mod int;
+mod lvar;
 mod module;
 mod nil;
 mod parse;
@@ -41,6 +42,7 @@ pub fn parse(string: &str) -> Node {
     .or_else(|| Nil::parse(&tokens))
     .or_else(|| Self_::parse(&tokens))
     .or_else(|| Symbol::parse(&tokens))
+    .or_else(|| LVar::parse(&tokens))
     .or_else(|| Dstr::parse(&tokens))
     .or_else(|| Module::parse(&tokens))
     .or_else(|| Class::parse(&tokens))
