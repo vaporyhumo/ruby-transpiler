@@ -1,12 +1,13 @@
 #![allow(dead_code)]
 
 pub use {
-  begin::Begin, const_::Const, dstr::Dstr, false_::False, global::Global,
+  begin::Begin, class::Class, const_::Const, dstr::Dstr, false_::False, global::Global,
   id::Id, int::Int, module::Module, nil::Nil, self_::Self_, send::Send,
   symbol::Symbol, true_::True,
 };
 
 pub mod begin;
+pub mod class;
 pub mod const_;
 pub mod dstr;
 pub mod false_;
@@ -24,6 +25,7 @@ pub mod true_;
 #[derive(Debug, PartialEq, Eq)]
 pub enum Node {
   Begin(Begin),
+  Class(Class),
   Const(Const),
   Dstr(Dstr),
   False(False),

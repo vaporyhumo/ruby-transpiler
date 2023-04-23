@@ -4,6 +4,9 @@ macro_rules! s {
   (begin) => {
     Begin::new()
   };
+  (class $s:expr, nil) => {
+    Class::new($s)
+  };
   (const $s:literal) => {
     Const::new($s)
   };

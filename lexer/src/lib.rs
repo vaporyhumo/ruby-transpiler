@@ -1,9 +1,10 @@
 use {
-  const_::Const, dstring::DString, end::End, false_::False, global::Global,
+  class::Class, const_::Const, dstring::DString, end::End, false_::False, global::Global,
   id::Id, int::Int, module::Module, nil::Nil, self_::Self_, symbol::Symbol,
   true_::True, wspace::WSpace,
 };
 
+mod class;
 mod const_;
 mod dstring;
 mod end;
@@ -21,6 +22,7 @@ mod wspace;
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum Token {
+  Class,
   Const(String),
   DString(String),
   End,
@@ -44,6 +46,7 @@ impl Token {
       .or_else(|| False::lex(string))
       .or_else(|| True::lex(string))
       .or_else(|| Nil::lex(string))
+      .or_else(|| Class::lex(string))
       .or_else(|| Module::lex(string))
       .or_else(|| End::lex(string))
       .or_else(|| Self_::lex(string))
@@ -98,6 +101,7 @@ mod tests {
     assert_eq!(lex(":sym"), vec![Symbol::token(":sym")]);
     assert_eq!(lex("hello"), vec![Id::token("hello")]);
     assert_eq!(lex("module"), vec![Module::token()]);
+    assert_eq!(lex("class"), vec![Class::token()]);
     assert_eq!(lex("\"hello\""), vec![DString::token("\"hello\"")]);
     assert_eq!(
       lex("puts \"hello\""),

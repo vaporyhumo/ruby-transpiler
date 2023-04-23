@@ -1,6 +1,6 @@
 use {
   ast::{
-    Begin, Const, Dstr, False, Global, Int, Module, Nil, Node, Self_, Send,
+    Begin, Class, Const, Dstr, False, Global, Int, Module, Nil, Node, Self_, Send,
     Symbol, True,
   },
   lexer::Token,
@@ -8,6 +8,7 @@ use {
 };
 
 mod begin;
+mod class;
 mod const_;
 mod dstr;
 mod false_;
@@ -42,6 +43,7 @@ pub fn parse(string: &str) -> Node {
     .or_else(|| Symbol::parse(&tokens))
     .or_else(|| Dstr::parse(&tokens))
     .or_else(|| Module::parse(&tokens))
+    .or_else(|| Class::parse(&tokens))
     .or_else(|| Begin::parse(&tokens))
     .or_else(|| Send::parse(&tokens))
     .unwrap_or_else(|| panic!("Unexpected token: {tokens:?}"))
