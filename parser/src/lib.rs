@@ -1,7 +1,7 @@
 use {
   ast::{
-    Begin, Class, Const, Dstr, False, Global, Int, LVar, Module, Nil, Node, Self_, Send,
-    Symbol, True,
+    Begin, Class, Comment, Const, Dstr, False, Global, Int, LVar, Module, Nil,
+    Node, Self_, Send, Symbol, True,
   },
   lexer::Token,
   parse::Parse,
@@ -9,6 +9,7 @@ use {
 
 mod begin;
 mod class;
+mod comment;
 mod const_;
 mod dstr;
 mod false_;
@@ -34,7 +35,9 @@ const fn is_whitespace(token: &Token) -> bool {
 pub fn parse(string: &str) -> Node {
   let tokens: Vec<Token> = Token::lex(string);
   let tokens: Vec<Token> = tokens.into_iter().filter(is_whitespace).collect();
-  False::parse(&tokens)
+  Begin::parse(&tokens)
+    .or_else(|| False::parse(&tokens))
+    .or_else(|| Comment::parse(&tokens))
     .or_else(|| Const::parse(&tokens))
     .or_else(|| Global::parse(&tokens))
     .or_else(|| Int::parse(&tokens))

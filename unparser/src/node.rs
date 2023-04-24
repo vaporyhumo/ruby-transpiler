@@ -5,6 +5,7 @@ impl Unparse for Node {
     match self {
       Self::Begin(begin) => begin.unparse(),
       Self::Class(class) => class.unparse(),
+      Self::Comment(comment) => comment.unparse(),
       Self::Const(const_) => const_.unparse(),
       Self::Dstr(dstr) => dstr.unparse(),
       Self::False(false_) => false_.unparse(),

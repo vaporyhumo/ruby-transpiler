@@ -51,10 +51,7 @@ mod tests {
 
   #[test]
   fn test_split() {
-    assert_eq!(
-      LVar::split("@foo"),
-      Some(("@foo".to_string(), String::new()))
-    );
+    assert_eq!(LVar::split("@foo"), Some(("@foo".to_string(), String::new())));
   }
 
   #[test]
@@ -64,17 +61,11 @@ mod tests {
 
   #[test]
   fn test_node_from() {
-    assert_eq!(
-      Token::from(LVar::new("@foo")),
-      Token::LVar("@foo".to_string())
-    );
+    assert_eq!(Token::from(LVar::new("@foo")), Token::LVar("@foo".to_string()));
   }
 
   #[test]
   fn test_lex() {
-    assert_eq!(
-      LVar::lex("@foo"),
-      Some((LVar::token("@foo"), String::new()))
-    );
+    assert_eq!(LVar::lex("@foo"), Some((LVar::token("@foo"), String::new())));
   }
 }

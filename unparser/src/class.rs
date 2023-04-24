@@ -10,7 +10,7 @@ impl Unparse for Class {
 mod tests {
   use {
     super::*,
-    ast::{const_::Const, class::Class, s},
+    ast::{class::Class, const_::Const, s},
   };
 
   #[test]

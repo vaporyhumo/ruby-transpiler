@@ -15,7 +15,7 @@ impl WSpace {
   }
 
   fn split(string: &str) -> Option<(String, String)> {
-    split::split(string, "^[ \t]+")
+    split::split(string, "^[ \t\n]+")
   }
 
   pub fn lex(string: &str) -> Option<(Token, String)> {

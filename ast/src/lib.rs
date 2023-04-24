@@ -1,13 +1,14 @@
 #![allow(dead_code)]
 
 pub use {
-  begin::Begin, class::Class, const_::Const, dstr::Dstr, false_::False, global::Global,
-  id::Id, int::Int, lvar::LVar, module::Module, nil::Nil, self_::Self_, send::Send,
-  symbol::Symbol, true_::True,
+  begin::Begin, class::Class, comment::Comment, const_::Const, dstr::Dstr,
+  false_::False, global::Global, id::Id, int::Int, lvar::LVar, module::Module,
+  nil::Nil, self_::Self_, send::Send, symbol::Symbol, true_::True,
 };
 
 pub mod begin;
 pub mod class;
+pub mod comment;
 pub mod const_;
 pub mod dstr;
 pub mod false_;
@@ -23,10 +24,11 @@ pub mod send;
 pub mod symbol;
 pub mod true_;
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Node {
   Begin(Begin),
   Class(Class),
+  Comment(Comment),
   Const(Const),
   Dstr(Dstr),
   False(False),

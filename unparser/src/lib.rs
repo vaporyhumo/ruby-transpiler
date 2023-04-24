@@ -4,6 +4,7 @@ use {crate::unparse::Unparse, parser::parse};
 
 mod begin;
 mod class;
+mod comment;
 mod const_;
 mod dstr;
 mod false_;
@@ -45,5 +46,8 @@ mod tests {
     assert_eq!(parse_unparse("puts \"hello world\""), "puts \"hello world\"");
     assert_eq!(parse_unparse("module Hola end"), "module Hola\nend");
     assert_eq!(parse_unparse("class Hola end"), "class Hola\nend");
+    assert_eq!(parse_unparse("# comment"), "# comment");
+    assert_eq!(parse_unparse("# comment\n\n"), "# comment");
+    assert_eq!(parse_unparse("# comment\n# comment"), "# comment\n# comment");
   }
 }

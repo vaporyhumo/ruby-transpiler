@@ -1,10 +1,11 @@
 use {
-  class::Class, const_::Const, dstring::DString, end::End, false_::False, global::Global,
-  id::Id, int::Int, lvar::LVar, module::Module, nil::Nil, self_::Self_, symbol::Symbol,
-  true_::True, wspace::WSpace,
+  class::Class, comment::Comment, const_::Const, dstring::DString, end::End,
+  false_::False, global::Global, id::Id, int::Int, lvar::LVar, module::Module,
+  nil::Nil, self_::Self_, symbol::Symbol, true_::True, wspace::WSpace,
 };
 
 mod class;
+mod comment;
 mod const_;
 mod dstring;
 mod end;
@@ -24,6 +25,7 @@ mod wspace;
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum Token {
   Class,
+  Comment(String),
   Const(String),
   DString(String),
   End,
@@ -43,6 +45,7 @@ pub enum Token {
 impl Token {
   fn lex_token(string: &str) -> Option<(Self, String)> {
     WSpace::lex(string)
+      .or_else(|| Comment::lex(string))
       .or_else(|| Const::lex(string))
       .or_else(|| Int::lex(string))
       .or_else(|| False::lex(string))
@@ -111,5 +114,10 @@ mod tests {
       vec![Id::token("puts"), WSpace::token(" "), DString::token("\"hello\"")]
     );
     assert_eq!(lex(" "), vec![WSpace::token(" ")]);
+    assert_eq!(lex("# foo"), vec![Comment::token("# foo")]);
+    assert_eq!(
+      lex("# foo\n"),
+      vec![Comment::token("# foo"), WSpace::token("\n")]
+    );
   }
 }

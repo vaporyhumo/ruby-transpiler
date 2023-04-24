@@ -1,6 +1,6 @@
 use crate::Node;
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Nil {}
 
 impl Nil {

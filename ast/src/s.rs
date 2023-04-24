@@ -2,10 +2,13 @@
 #[macro_export]
 macro_rules! s {
   (begin) => {
-    Begin::new()
+    Begin::new(vec![])
   };
   (class $s:expr, nil) => {
     Class::new($s)
+  };
+  (comment $s:literal) => {
+    Comment::new($s)
   };
   (const $s:literal) => {
     Const::new($s)
@@ -60,7 +63,7 @@ mod tests {
 
   #[test]
   fn test_s() {
-    assert_eq!(s!(begin), Begin {});
+    assert_eq!(s!(begin), Begin::new(vec![]));
     assert_eq!(s!(false), False {});
     assert_eq!(s!(id, "foo"), Id::new("foo"));
     assert_eq!(s!(nil), Nil {});

@@ -2,7 +2,12 @@ use {crate::unparse::Unparse, ast::Begin};
 
 impl Unparse for Begin {
   fn unparse(&self) -> String {
-    String::new()
+    self
+      .statements()
+      .iter()
+      .map(|s| s.unparse())
+      .collect::<Vec<String>>()
+      .join("\n")
   }
 }
 
